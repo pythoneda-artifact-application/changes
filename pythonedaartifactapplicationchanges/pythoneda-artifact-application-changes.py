@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-pythonedaartifactapplicationpyprojectversioning/pythoneda-artifact-application-pyproject-versioning.py
+pythonedaartifactapplicationchanges/pythoneda-artifact-application-changes.py
 
-This file defines PyprojectVersioning.
+This file defines Changes.
 
-Copyright (C) 2023-today rydnr's pythoneda-artifact-application/pyproject-versioning
+Copyright (C) 2023-today rydnr's pythoneda-artifact-application/changes
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,24 +22,24 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import asyncio
 from pythonedaapplication.pythoneda import PythonEDA
 
-class PyprojectVersioning(PythonEDA):
+class Changes(PythonEDA):
     """
     PythonEDA application that runs Pyproject Versioning artifact space.
 
-    Class name: PyprojectVersioning
+    Class name: Changes
 
     Responsibilities:
-        - Runs Pyproject Versioning artifact space.
+        - Runs Changes artifact space.
 
     Collaborators:
         - asyncio: To manage asynchronous threads.
     """
     def __init__(self):
         """
-        Creates a new PyprojectVersioning instance.
+        Creates a new Changes instance.
         """
         super().__init__(__file__)
 
 if __name__ == "__main__":
 
-    asyncio.run(PyprojectVersioning.main())
+    asyncio.run(Changes.main())

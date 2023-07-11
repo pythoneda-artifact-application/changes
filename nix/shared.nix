@@ -10,13 +10,13 @@ rec {
     echo -e " \033[32m             _   _                          \033[35m_\033[0m";
     echo -e " \033[32m            | | | |                        \033[35m| | \033[37mGPLv3\033[0m";
     echo -e " \033[32m _ __  _   _| |_| |__   ___  _ __   \033[34m___  \033[35m__| | \033[36m__ _ \033[32mhttps://github.com/nixos/nixpkgs/$NIXPKGSRELEASE\033[0m";
-    echo -e " \033[32m| '_ \| | | | __| '_ \ / _ \| '_ \ \033[34m/ _ \\\\\033[35m/ _\` |\033[36m/ _\` |\033[33mhttps://github.com/pythoneda-artifact-application/pyproject-versioning\033[0m";
-    echo -e " \033[32m| |_) | |_| | |_| | | | (_) | | | |\033[34m  __/\033[35m (_| |\033[36m (_| |\033[34mhttps://github.com/pythoneda-artifact-infrastructure/pyproject-versioning\033[0m";
-    echo -e " \033[32m| .__/ \__, |\__|_| |_|\___/|_| |_|\033[34m\___|\033[35m\__,_|\033[36m\__,_|\033[35mhttps://github.com/pythoneda-artifact/pyproject-versioning\033[0m";
+    echo -e " \033[32m| '_ \| | | | __| '_ \ / _ \| '_ \ \033[34m/ _ \\\\\033[35m/ _\` |\033[36m/ _\` |\033[33mhttps://github.com/pythoneda-artifact-application/changes\033[0m";
+    echo -e " \033[32m| |_) | |_| | |_| | | | (_) | | | |\033[34m  __/\033[35m (_| |\033[36m (_| |\033[34mhttps://github.com/pythoneda-artifact-infrastructure/changes\033[0m";
+    echo -e " \033[32m| .__/ \__, |\__|_| |_|\___/|_| |_|\033[34m\___|\033[35m\__,_|\033[36m\__,_|\033[35mhttps://github.com/pythoneda-artifact/changes\033[0m";
     echo -e " \033[32m| |     __/ |                                       \033[36mhttps://github.com/pythoneda\033[0m";
-    echo -e " \033[32m|_| \033[31mA\033[36mA\033[32m |___/          \033[33mPYPROJECT VERSIONING          \033[37mhttps://patreon.com/rydnr\033[0m";
+    echo -e " \033[32m|_| \033[31mA\033[36mA\033[32m |___/                \033[33mCHANGES                 \033[37mhttps://patreon.com/rydnr\033[0m";
     echo;
-    echo " Thank you for using pythoneda-artifact-application/pyproject-versioning and for your appreciation of free software.";
+    echo " Thank you for using pythoneda-artifact-application/changes and for your appreciation of free software.";
     echo;
     export PYTHONPATH="$(python $PYTHONEDABASE/scripts/fix_pythonpath.py)";
   '';

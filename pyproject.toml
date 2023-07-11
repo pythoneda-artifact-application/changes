@@ -1,21 +1,21 @@
 [tool.poetry]
-name = "pythoneda-artifact-application-pyproject-versioning"
-version = "0.0.1a2"
-description = "Application layer for pythoneda-artifact/pyproject-versioning"
+name = "pythoneda-artifact-application-changes"
+version = "0.0.1a1"
+description = "Application layer for pythoneda-artifact/changes"
 authors = ["rydnr <github@acm-sl.org>"]
 readme = "README.md"
-homepage = "https://github.com/pythoneda-artifact-application/pyproject-versioning"
-packages = [{include = "pythonedaartifactapplicationpyprojectversioning"}]
+homepage = "https://github.com/pythoneda-artifact-application/changes"
+packages = [{include = "pythonedaartifactapplicationchanges"}]
 
 [tool.poetry.dependencies]
 dbus-next = "^0.2.3"
 grpcio = "^1.41.0"
 python = "^3.8"
 pythoneda-application-base = "^0.0.1a12"
-pythoneda-artifact-event-versioning = "^0.0.1a1"
-pythoneda-artifact-event-infrastructure-versioning = "^0.0.1a1"
-pythoneda-artifact-pyproject-versioning = "^0.0.1a1"
-pythoneda-artifact-infrastructure-pyproject-versioning = "^0.0.1a1"
+pythoneda-artifact-changes = "^0.0.1a1"
+pythoneda-artifact-event-changes = "^0.0.1a1"
+pythoneda-artifact-event-infrastructure-changes = "^0.0.1a1"
+pythoneda-artifact-infrastructure-changes = "^0.0.1a1"
 pythoneda-base = "^0.0.1a16"
 pythoneda-infrastructure-base = "^0.0.1a12"
 pythoneda-shared-git = "^0.0.1a3"

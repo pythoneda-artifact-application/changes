@@ -1,6 +1,5 @@
 {
-  description = "Application layer for pythoneda-artifact/pyproject-versioning";
-
+  description = "Application layer for pythoneda-artifact/changes";
   inputs = rec {
     nixos.url = "github:NixOS/nixpkgs/nixos-23.05";
     flake-utils.url = "github:numtide/flake-utils/v1.0.0";
@@ -9,27 +8,28 @@
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
     };
-    pythoneda-artifact-event-versioning = {
-      url = "github:pythoneda-artifact-event/versioning/0.0.1a1";
+    pythoneda-artifact-event-changes = {
+      url = "github:pythoneda-artifact-event/changes/0.0.1a1";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-base.follows = "pythoneda-base";
     };
-    pythoneda-artifact-event-infrastructure-versioning = {
-      url = "github:pythoneda-artifact-event-infrastructure/versioning/0.0.1a1";
+    pythoneda-artifact-event-infrastructure-changes = {
+      url = "github:pythoneda-artifact-event-infrastructure/changes/0.0.1a1";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-base.follows = "pythoneda-base";
-      inputs.pythoneda-artifact-event-versioning.follows =
-        "pythoneda-artifact-event-versioning";
+      inputs.pythoneda-artifact-event-changes.follows =
+        "pythoneda-artifact-event-changes";
     };
-    pythoneda-artifact-pyproject-versioning = {
-      url = "github:pythoneda-artifact/pyproject-versioning/0.0.1a2";
+    pythoneda-artifact-changes = {
+      url = "github:pythoneda-artifact/changes/0.0.1a1";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-base.follows = "pythoneda-base";
-      inputs.pythoneda-artifact-event-versioning.follows =
-        "pythoneda-artifact-event-versioning";
+      inputs.pythoneda-artifact-event-changes.follows =
+        "pythoneda-artifact-event-changes";
+      inputs.pythoneda-shared-git.follows = "pythoneda-shared-git";
     };
     pythoneda-infrastructure-base = {
       url = "github:pythoneda-infrastructure/base/0.0.1a12";
@@ -37,20 +37,18 @@
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-base.follows = "pythoneda-base";
     };
-    pythoneda-artifact-infrastructure-pyproject-versioning = {
-      url =
-        "github:pythoneda-artifact-infrastructure/pyproject-versioning/0.0.1a1";
+    pythoneda-artifact-infrastructure-changes = {
+      url = "github:pythoneda-artifact-infrastructure/changes/0.0.1a1";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-base.follows = "pythoneda-base";
-      inputs.pythoneda-artifact-pyproject-versioning.follows =
-        "pythoneda-artifact-pyproject-versioning";
+      inputs.pythoneda-artifact-changes.follows = "pythoneda-artifact-changes";
       inputs.pythoneda-infrastructure-base.follows =
         "pythoneda-infrastructure-base";
-      inputs.pythoneda-artifact-event-versioning.follows =
-        "pythoneda-artifact-event-versioning";
-      inputs.pythoneda-artifact-event-infrastructure-versioning.follows =
-        "pythoneda-artifact-event-infrastructure-versioning";
+      inputs.pythoneda-artifact-event-changes.follows =
+        "pythoneda-artifact-event-changes";
+      inputs.pythoneda-artifact-event-infrastructure-changes.follows =
+        "pythoneda-artifact-event-infrastructure-changes";
       inputs.pythoneda-shared-git.follows = "pythoneda-shared-git";
     };
     pythoneda-application-base = {
@@ -73,23 +71,20 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixos { inherit system; };
-        pname = "pythoneda-artifact-application-pyproject-versioning";
-        description =
-          "Application layer for pythoneda-artifact/pyproject-versioning";
+        pname = "pythoneda-artifact-application-changes";
+        description = "Application layer for pythoneda-artifact/changes";
         license = pkgs.lib.licenses.gpl3;
-        homepage =
-          "https://github.com/pythoneda-artifact-application/pyproject-versioning";
+        homepage = "https://github.com/pythoneda-artifact-application/changes";
         maintainers = with pkgs.lib.maintainers; [ ];
         nixpkgsRelease = "nixos-23.05";
         shared = import ./nix/shared.nix;
-        pythonpackage = "pythonedaartifactapplicationpyprojectversioning";
+        pythonpackage = "pythonedaartifactapplicationchanges";
         entrypoint = "${pythonpackage}/${pname}.py";
-        pythoneda-artifact-application-pyproject-versioning-for = { pname
-          , version, pythoneda-base, pythoneda-artifact-event-versioning
-          , pythoneda-artifact-event-infrastructure-versioning
-          , pythoneda-artifact-pyproject-versioning
-          , pythoneda-infrastructure-base
-          , pythoneda-artifact-infrastructure-pyproject-versioning
+        pythoneda-artifact-application-changes-for = { pname, version
+          , pythoneda-base, pythoneda-artifact-event-changes
+          , pythoneda-artifact-event-infrastructure-changes
+          , pythoneda-artifact-changes, pythoneda-infrastructure-base
+          , pythoneda-artifact-infrastructure-changes
           , pythoneda-application-base, pythoneda-shared-git, python }:
           let
             pythonVersionParts = builtins.splitVersion python.version;
@@ -112,10 +107,10 @@
               GitPython
               grpcio
               pythoneda-application-base
-              pythoneda-artifact-event-versioning
-              pythoneda-artifact-event-infrastructure-versioning
-              pythoneda-artifact-pyproject-versioning
-              pythoneda-artifact-infrastructure-pyproject-versioning
+              pythoneda-artifact-event-changes
+              pythoneda-artifact-event-infrastructure-changes
+              pythoneda-artifact-changes
+              pythoneda-artifact-infrastructure-changes
               pythoneda-base
               pythoneda-infrastructure-base
               pythoneda-shared-git
@@ -130,10 +125,10 @@
               python -m venv .env
               source .env/bin/activate
               pip install ${pythoneda-application-base}/dist/pythoneda_application_base-${pythoneda-application-base.version}-py3-none-any.whl
-              pip install ${pythoneda-artifact-event-versioning}/dist/pythoneda_artifact_event_versioning-${pythoneda-artifact-event-versioning.version}-py3-none-any.whl
-              pip install ${pythoneda-artifact-event-infrastructure-versioning}/dist/pythoneda_artifact_event_infrastructure_versioning-${pythoneda-artifact-event-infrastructure-versioning.version}-py3-none-any.whl
-              pip install ${pythoneda-artifact-pyproject-versioning}/dist/pythoneda_artifact_pyproject_versioning-${pythoneda-artifact-pyproject-versioning.version}-py3-none-any.whl
-              pip install ${pythoneda-artifact-infrastructure-pyproject-versioning}/dist/pythoneda_artifact_infrastructure_pyproject_versioning-${pythoneda-artifact-infrastructure-pyproject-versioning.version}-py3-none-any.whl
+              pip install ${pythoneda-artifact-event-changes}/dist/pythoneda_artifact_event_changes-${pythoneda-artifact-event-changes.version}-py3-none-any.whl
+              pip install ${pythoneda-artifact-event-infrastructure-changes}/dist/pythoneda_artifact_event_infrastructure_changes-${pythoneda-artifact-event-infrastructure-changes.version}-py3-none-any.whl
+              pip install ${pythoneda-artifact-changes}/dist/pythoneda_artifact_changes-${pythoneda-artifact-changes.version}-py3-none-any.whl
+              pip install ${pythoneda-artifact-infrastructure-changes}/dist/pythoneda_artifact_infrastructure_changes-${pythoneda-artifact-infrastructure-changes.version}-py3-none-any.whl
               pip install ${pythoneda-base}/dist/pythoneda_base-${pythoneda-base.version}-py3-none-any.whl
               pip install ${pythoneda-infrastructure-base}/dist/pythoneda_infrastructure_base-${pythoneda-infrastructure-base.version}-py3-none-any.whl
               pip install ${pythoneda-shared-git}/dist/pythoneda_shared_git-${pythoneda-shared-git.version}-py3-none-any.whl
@@ -155,121 +150,119 @@
               inherit description homepage license maintainers;
             };
           };
-        pythoneda-artifact-application-pyproject-versioning-0_0_1a2-for =
-          { pythoneda-base, pythoneda-artifact-event-versioning
-          , pythoneda-artifact-event-infrastructure-versioning
-          , pythoneda-artifact-pyproject-versioning
-          , pythoneda-infrastructure-base
-          , pythoneda-artifact-infrastructure-pyproject-versioning
+        pythoneda-artifact-application-changes-0_0_1a1-for = { pythoneda-base
+          , pythoneda-artifact-event-changes
+          , pythoneda-artifact-event-infrastructure-changes
+          , pythoneda-artifact-changes, pythoneda-infrastructure-base
+          , pythoneda-artifact-infrastructure-changes
           , pythoneda-application-base, pythoneda-shared-git, python }:
-          pythoneda-artifact-application-pyproject-versioning-for {
-            version = "0.0.1a2";
-            inherit pname pythoneda-base pythoneda-artifact-event-versioning
-              pythoneda-artifact-event-infrastructure-versioning
-              pythoneda-artifact-pyproject-versioning
-              pythoneda-infrastructure-base
-              pythoneda-artifact-infrastructure-pyproject-versioning
+          pythoneda-artifact-application-changes-for {
+            version = "0.0.1a1";
+            inherit pname pythoneda-base pythoneda-artifact-event-changes
+              pythoneda-artifact-event-infrastructure-changes
+              pythoneda-artifact-changes pythoneda-infrastructure-base
+              pythoneda-artifact-infrastructure-changes
               pythoneda-application-base pythoneda-shared-git python;
           };
       in rec {
         packages = rec {
-          pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python39 =
-            pythoneda-artifact-application-pyproject-versioning-0_0_1a2-for {
+          pythoneda-artifact-application-changes-0_0_1a1-python39 =
+            pythoneda-artifact-application-changes-0_0_1a1-for {
               pythoneda-base =
                 pythoneda-base.packages.${system}.pythoneda-base-latest-python39;
-              pythoneda-artifact-event-versioning =
-                pythoneda-artifact-event-versioning.packages.${system}.pythoneda-artifact-event-versioning-latest-python39;
-              pythoneda-artifact-event-infrastructure-versioning =
-                pythoneda-artifact-event-infrastructure-versioning.packages.${system}.pythoneda-artifact-event-infrastructure-versioning-latest-python39;
-              pythoneda-artifact-pyproject-versioning =
-                pythoneda-artifact-pyproject-versioning.packages.${system}.pythoneda-artifact-pyproject-versioning-latest-python39;
+              pythoneda-artifact-event-changes =
+                pythoneda-artifact-event-changes.packages.${system}.pythoneda-artifact-event-changes-latest-python39;
+              pythoneda-artifact-event-infrastructure-changes =
+                pythoneda-artifact-event-infrastructure-changes.packages.${system}.pythoneda-artifact-event-infrastructure-changes-latest-python39;
+              pythoneda-artifact-changes =
+                pythoneda-artifact-changes.packages.${system}.pythoneda-artifact-changes-latest-python39;
               pythoneda-infrastructure-base =
                 pythoneda-infrastructure-base.packages.${system}.pythoneda-infrastructure-base-latest-python39;
-              pythoneda-artifact-infrastructure-pyproject-versioning =
-                pythoneda-artifact-infrastructure-pyproject-versioning.packages.${system}.pythoneda-artifact-infrastructure-pyproject-versioning-latest-python39;
+              pythoneda-artifact-infrastructure-changes =
+                pythoneda-artifact-infrastructure-changes.packages.${system}.pythoneda-artifact-infrastructure-changes-latest-python39;
               pythoneda-application-base =
                 pythoneda-application-base.packages.${system}.pythoneda-application-base-latest-python39;
               pythoneda-shared-git =
                 pythoneda-shared-git.packages.${system}.pythoneda-shared-git-latest-python39;
               python = pkgs.python39;
             };
-          pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python310 =
-            pythoneda-artifact-application-pyproject-versioning-0_0_1a2-for {
+          pythoneda-artifact-application-changes-0_0_1a1-python310 =
+            pythoneda-artifact-application-changes-0_0_1a1-for {
               pythoneda-base =
                 pythoneda-base.packages.${system}.pythoneda-base-latest-python310;
-              pythoneda-artifact-event-versioning =
-                pythoneda-artifact-event-versioning.packages.${system}.pythoneda-artifact-event-versioning-latest-python310;
-              pythoneda-artifact-event-infrastructure-versioning =
-                pythoneda-artifact-event-infrastructure-versioning.packages.${system}.pythoneda-artifact-event-infrastructure-versioning-latest-python310;
-              pythoneda-artifact-pyproject-versioning =
-                pythoneda-artifact-pyproject-versioning.packages.${system}.pythoneda-artifact-pyproject-versioning-latest-python310;
+              pythoneda-artifact-event-changes =
+                pythoneda-artifact-event-changes.packages.${system}.pythoneda-artifact-event-changes-latest-python310;
+              pythoneda-artifact-event-infrastructure-changes =
+                pythoneda-artifact-event-infrastructure-changes.packages.${system}.pythoneda-artifact-event-infrastructure-changes-latest-python310;
+              pythoneda-artifact-changes =
+                pythoneda-artifact-changes.packages.${system}.pythoneda-artifact-changes-latest-python310;
               pythoneda-infrastructure-base =
                 pythoneda-infrastructure-base.packages.${system}.pythoneda-infrastructure-base-latest-python310;
-              pythoneda-artifact-infrastructure-pyproject-versioning =
-                pythoneda-artifact-infrastructure-pyproject-versioning.packages.${system}.pythoneda-artifact-infrastructure-pyproject-versioning-latest-python310;
+              pythoneda-artifact-infrastructure-changes =
+                pythoneda-artifact-infrastructure-changes.packages.${system}.pythoneda-artifact-infrastructure-changes-latest-python310;
               pythoneda-application-base =
                 pythoneda-application-base.packages.${system}.pythoneda-application-base-latest-python310;
               pythoneda-shared-git =
                 pythoneda-shared-git.packages.${system}.pythoneda-shared-git-latest-python310;
               python = pkgs.python310;
             };
-          pythoneda-artifact-application-pyproject-versioning-latest-python39 =
-            pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python39;
-          pythoneda-artifact-application-pyproject-versioning-latest-python310 =
-            pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python310;
-          pythoneda-artifact-application-pyproject-versioning-latest =
-            pythoneda-artifact-application-pyproject-versioning-latest-python310;
-          default = pythoneda-artifact-application-pyproject-versioning-latest;
+          pythoneda-artifact-application-changes-latest-python39 =
+            pythoneda-artifact-application-changes-0_0_1a1-python39;
+          pythoneda-artifact-application-changes-latest-python310 =
+            pythoneda-artifact-application-changes-0_0_1a1-python310;
+          pythoneda-artifact-application-changes-latest =
+            pythoneda-artifact-application-changes-latest-python310;
+          default = pythoneda-artifact-application-changes-latest;
         };
         defaultPackage = packages.default;
         apps = rec {
-          pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python39 =
+          pythoneda-artifact-application-changes-0_0_1a1-python39 =
             shared.app-for {
               package =
-                self.packages.${system}.pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python39;
+                self.packages.${system}.pythoneda-artifact-application-changes-0_0_1a1-python39;
               inherit pname;
             };
-          pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python310 =
+          pythoneda-artifact-application-changes-0_0_1a1-python310 =
             shared.app-for {
               package =
-                self.packages.${system}.pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python310;
+                self.packages.${system}.pythoneda-artifact-application-changes-0_0_1a1-python310;
               inherit pname;
             };
-          pythoneda-artifact-application-pyproject-versioning-latest-python39 =
-            pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python39;
-          pythoneda-artifact-application-pyproject-versioning-latest-python310 =
-            pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python310;
-          pythoneda-artifact-application-pyproject-versioning-latest =
-            pythoneda-artifact-application-pyproject-versioning-latest-python310;
-          default = pythoneda-artifact-application-pyproject-versioning-latest;
+          pythoneda-artifact-application-changes-latest-python39 =
+            pythoneda-artifact-application-changes-0_0_1a1-python39;
+          pythoneda-artifact-application-changes-latest-python310 =
+            pythoneda-artifact-application-changes-0_0_1a1-python310;
+          pythoneda-artifact-application-changes-latest =
+            pythoneda-artifact-application-changes-latest-python310;
+          default = pythoneda-artifact-application-changes-latest;
         };
         defaultApp = apps.default;
         devShells = rec {
-          pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python39 =
+          pythoneda-artifact-application-changes-0_0_1a1-python39 =
             shared.devShell-for {
               package =
-                packages.pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python39;
+                packages.pythoneda-artifact-application-changes-0_0_1a1-python39;
               pythoneda-base =
                 pythoneda-base.packages.${system}.pythoneda-base-latest-python39;
               python = pkgs.python39;
               inherit pkgs nixpkgsRelease;
             };
-          pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python310 =
+          pythoneda-artifact-application-changes-0_0_1a1-python310 =
             shared.devShell-for {
               package =
-                packages.pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python310;
+                packages.pythoneda-artifact-application-changes-0_0_1a1-python310;
               pythoneda-base =
                 pythoneda-base.packages.${system}.pythoneda-base-latest-python310;
               python = pkgs.python310;
               inherit pkgs nixpkgsRelease;
             };
-          pythoneda-artifact-application-pyproject-versioning-latest-python39 =
-            pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python39;
-          pythoneda-artifact-application-pyproject-versioning-latest-python310 =
-            pythoneda-artifact-application-pyproject-versioning-0_0_1a2-python310;
-          pythoneda-artifact-application-pyproject-versioning-latest =
-            pythoneda-artifact-application-pyproject-versioning-latest-python310;
-          default = pythoneda-artifact-application-pyproject-versioning-latest;
+          pythoneda-artifact-application-changes-latest-python39 =
+            pythoneda-artifact-application-changes-0_0_1a1-python39;
+          pythoneda-artifact-application-changes-latest-python310 =
+            pythoneda-artifact-application-changes-0_0_1a1-python310;
+          pythoneda-artifact-application-changes-latest =
+            pythoneda-artifact-application-changes-latest-python310;
+          default = pythoneda-artifact-application-changes-latest;
 
         };
       });
