@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pythoneda-artifact-application-changes"
-version = "0.0.1a1"
+version = "0.0.1a2"
 description = "Application layer for pythoneda-artifact/changes"
 authors = ["rydnr <github@acm-sl.org>"]
 readme = "README.md"
